@@ -142,3 +142,218 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md. Tanvir Kobir - Sales & Distribution Portal</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 5px 0;
+            font-size: 22px;
+        }
+        .header p {
+            margin: 0;
+            font-size: 14px;
+            color: #b2dfdb;
+        }
+        .container {
+            padding: 15px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #004d40;
+            border-bottom: 2px solid #e0f2f1;
+            padding-bottom: 8px;
+            font-size: 16px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-attendance { background-color: #2e7d32; color: white; }
+        .btn-order { background-color: #f57c00; color: white; }
+        .btn-location { background-color: #0288d1; color: white; }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+        }
+        .product-info p {
+            margin: 0;
+            font-size: 12px;
+            color: #666;
+        }
+        #order-section {
+            display: none;
+        }
+        .success-msg {
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Md. Tanvir Kobir</h1>
+        <p>Proprietor & Sales Management Portal</p>
+    </div>
+
+    <div class="container">
+        
+        <!-- Company & Owner Info -->
+        <div class="card">
+            <h3>Company & Owner Details</h3>
+            <div class="info-row"><span><strong>Owner:</strong></span> <span>Md. Tanvir Kobir</span></div>
+            <div class="info-row"><span><strong>Location:</strong></span> <span>Chougacha, Jashore, Bangladesh</span></div>
+            <div class="info-row"><span><strong>Phone:</strong></span> <span>+880 1XXXXXXXXX</span></div>
+            <div class="info-row"><span><strong>Email:</strong></span> <span>tanvir@gmail.com</span></div>
+            <div class="info-row"><span><strong>Business Type:</strong></span> <span>Pharmaceuticals & Consumer Products</span></div>
+        </div>
+
+        <!-- Daily Attendance -->
+        <div class="card">
+            <h3>Field Staff Attendance</h3>
+            <p style="font-size: 13px; color: #666;" id="time-display"></p>
+            <button class="btn btn-attendance" onclick="giveAttendance()">✅ Submit Daily Attendance</button>
+            <div id="att-msg" class="success-msg"></div>
+        </div>
+
+        <!-- Market Location Tracking -->
+        <div class="card">
+            <h3>Live Market Tracking</h3>
+            <p style="font-size: 13px; color: #666;">Sync your current pharmacy/market location.</p>
+            <button class="btn btn-location" onclick="getLocation()">📍 Sync GPS Location</button>
+            <p id="location-status" class="success-msg"></p>
+        </div>
+
+        <!-- Order Section -->
+        <div class="card">
+            <h3>Product Ordering Panel</h3>
+            <button class="btn btn-order" onclick="toggleProducts()">🛒 Open Product Catalog</button>
+            
+            <div id="order-section">
+                <div class="product-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h4>Napa Extra 500mg (Imported/Local Box)</h4>
+                            <p>Price: ৳ 500 / Box</p>
+                        </div>
+                        <input type="number" placeholder="Qty" style="width: 50px; padding: 5px;" id="p1">
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h4>Seclo 20mg Capsule</h4>
+                            <p>Price: ৳ 450 / Box</p>
+                        </div>
+                        <input type="number" placeholder="Qty" style="width: 50px; padding: 5px;" id="p2">
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h4>Ace Plus Tablet</h4>
+                            <p>Price: ৳ 350 / Box</p>
+                        </div>
+                        <input type="number" placeholder="Qty" style="width: 50px; padding: 5px;" id="p3">
+                    </div>
+                </div>
+                <button class="btn btn-attendance" style="margin-top: 15px;" onclick="submitOrder()">Submit Order to Admin</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Current Time
+        document.getElementById('time-display').innerText = "Current Time: " + new Date().toLocaleString();
+
+        function giveAttendance() {
+            document.getElementById('att-msg').innerText = "Attendance recorded successfully!";
+        }
+
+        function getLocation() {
+            document.getElementById('location-status').innerText = "Fetching GPS coordinates...";
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    document.getElementById('location-status').innerText = 
+                    "Location Synced! Lat: " + position.coords.latitude.toFixed(4) + 
+                    ", Long: " + position.coords.longitude.toFixed(4);
+                });
+            } else { 
+                document.getElementById('location-status').innerText = "Geolocation is not supported.";
+            }
+        }
+
+        function toggleProducts() {
+            var x = document.getElementById("order-section");
+            if (x.style.display === "none" || x.style.display === "") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function submitOrder() {
+            alert("Order placed successfully! Admin will review it.");
+            document.getElementById("order-section").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
+
